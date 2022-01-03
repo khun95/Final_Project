@@ -12,13 +12,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene/Center_Hall.unity
     guid: 0798ab7783b667249bb617d9b29c600e
   - enabled: 1
-    path: Assets/Scenes/Scene/Corridor_Royal.unity
+    path: Assets/Scenes/Scene/New Folder/Corridor_Royal.unity
     guid: 40a85848678390b4a8f16c43c2f554d3
   - enabled: 1
-    path: Assets/Scenes/Scene/Corridor_Stone.unity
+    path: Assets/Scenes/Scene/New Folder/Corridor_Stone.unity
     guid: f611fd17590707a42846cbf8ee519ecd
   - enabled: 1
-    path: Assets/Scenes/Scene/Corridor_Wood.unity
+    path: Assets/Scenes/Scene/New Folder/Corridor_Wood.unity
     guid: a60ffbe1213849d429ffc8064ddd7664
   - enabled: 1
     path: Assets/Scenes/Scene/Crypt.unity
