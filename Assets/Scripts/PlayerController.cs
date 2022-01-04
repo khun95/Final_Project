@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
+
 public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -10,16 +12,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed;
     Animator animator;
     public static bool isLoaded;
-    //private void Awake()
-    //{
-    //    if (FindObjectsOfType<PlayerController>().Length != 1)
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
+    bool isEquip;
+    bool isMove;
+    public GameObject sword1;
+    public GameObject sword2;
+    public Action endAttackAnimeListner;
+
+
     void Start()
     {
         animator = charactorBody.GetComponent<Animator>();
+        sword2.SetActive(false);
     }
     private void Move()
     {
@@ -40,11 +43,52 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (!isMove)
+        {
+            Move();
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
 
-            animator.Play("Slash2");
+            animator.SetBool("isEquip", false);
+            isEquip = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (!isEquip)
+            {
+                animator.SetBool("isEquip", true);
+                isEquip = true;
+            }
+            else
+            {
+                    animator.SetTrigger("isSlash1");
+            }
         }
     }
+    void Equip()
+    {
+        sword1.SetActive(false);
+        sword2.SetActive(true);
+    }
+    void UnEquip()
+    {
+        sword2.SetActive(false);
+        sword1.SetActive(true);
+    }
+
+    void Attack()
+    {
+        sword2.GetComponent<BoxCollider>().enabled = true;
+        Debug.Log("att");
+    }
+    void EndAttack()
+    {
+        sword2.GetComponent<BoxCollider>().enabled = false;
+        endAttackAnimeListner();
+        endAttackAnimeListner = null;
+        Debug.Log("end");
+    }
 }
+
