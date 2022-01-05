@@ -136,7 +136,7 @@ public class DoorObjectController : MonoBehaviour
 	private void setupGui()
 	{
 		guiStyle = new GUIStyle();
-		guiStyle.fontSize = 16;
+		guiStyle.fontSize = 20;
 		guiStyle.fontStyle = FontStyle.Bold;
 		guiStyle.normal.textColor = Color.white;
 		msg = "Press Space to Open";
@@ -161,7 +161,7 @@ public class DoorObjectController : MonoBehaviour
     {
         if (showInteractMsg)  //show on-screen prompts to user for guide.
         {
-            GUI.Label(new Rect(50, Screen.height - 50, 200, 50), msg, guiStyle);
+            GUI.Label(new Rect(300, Screen.height - 50, 200, 50), msg, guiStyle);
         }
     }
     //End of GUI Config --------------

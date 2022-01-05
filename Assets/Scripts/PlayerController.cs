@@ -14,11 +14,13 @@ public class PlayerController : MonoBehaviour
     public static bool isLoaded;
     bool isEquip;
     bool isMove;
-    public GameObject sword1;
-    public GameObject sword2;
+    bool isDie;
+    [SerializeField] GameObject sword1;
+    [SerializeField] GameObject sword2;
     public Action endAttackAnimeListner;
-
-
+    public static float hpRate = 1f;
+    [SerializeField] float hp;
+    [SerializeField] float maxHp;
     void Start()
     {
         animator = charactorBody.GetComponent<Animator>();
@@ -43,8 +45,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        hpRate = hp/maxHp;
         if (!isMove)
         {
+            if (!isEquip)
+            {
+                moveSpeed = 8;
+            }
+            else
+            {
+                moveSpeed = 5;
+            }
             Move();
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -65,6 +76,23 @@ public class PlayerController : MonoBehaviour
             {
                     animator.SetTrigger("isSlash1");
             }
+        }
+        if (!isDie)
+        {
+            if (hp <= 0)
+            {
+                animator.Play("Die");
+                isDie = true;
+            }
+        }
+
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.other.tag == "Monster")
+        {
+            //animator.Play("Hit");
+            hp -= 10;
         }
     }
     void Equip()

@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterTest : MonoBehaviour
 {
     // Start is called before the first frame update
-    int hp = 100;
+    public float hp = 100;
+    public float maxHp;
     bool isHit = false;
-
+    public Slider hpBar;
+    private void Start()
+    {
+        maxHp = hp;
+    }
     public void HitRelease()
     {
         isHit = false;
@@ -28,7 +34,16 @@ public class MonsterTest : MonoBehaviour
     void Update()
     {
         Debug.Log("Hp : " + hp);
-        if(hp <= 0)
+        if (hp <= 0)
+        {
+            hpBar.gameObject.SetActive(false);
+        }
+        else
+        {
+            hpBar.value = hp / maxHp;
+        }
+
+        if (hp <= 0)
         {
             Destroy(gameObject);
         }
