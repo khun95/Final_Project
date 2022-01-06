@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 using System;
 
 public class PlayerController : MonoBehaviour
@@ -9,22 +9,25 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] Transform charactorBody;
     [SerializeField] Transform cameraArm;
+    [SerializeField] GameObject sword1;
+    [SerializeField] GameObject sword2;
     [SerializeField] float moveSpeed;
+    [SerializeField] float hp;
+    [SerializeField] float maxHp;
+    [SerializeField] float stamina = 100;
     Animator animator;
     public static bool isLoaded;
+    public static float hpRate = 1f;
+    public static float staminaRate = 1f;
     bool isEquip;
     bool isMove;
     bool isDie;
-    [SerializeField] GameObject sword1;
-    [SerializeField] GameObject sword2;
     public Action endAttackAnimeListner;
-    public static float hpRate = 1f;
-    [SerializeField] float hp;
-    [SerializeField] float maxHp;
     void Start()
     {
         animator = charactorBody.GetComponent<Animator>();
         sword2.SetActive(false);
+        StartCoroutine(StaminaHeal());
     }
     private void Move()
     {
@@ -46,6 +49,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         hpRate = hp/maxHp;
+        staminaRate = stamina / 100;
         if (!isMove)
         {
             if (!isEquip)
@@ -75,6 +79,14 @@ public class PlayerController : MonoBehaviour
             else
             {
                     animator.SetTrigger("isSlash1");
+            }
+        }
+        if (stamina >= 20)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                animator.Play("tumbling");
+                stamina -= 20;
             }
         }
         if (!isDie)
@@ -117,6 +129,20 @@ public class PlayerController : MonoBehaviour
         endAttackAnimeListner();
         endAttackAnimeListner = null;
         Debug.Log("end");
+    }
+
+    IEnumerator StaminaHeal()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            if (stamina < 100)
+            {
+
+                stamina += 1;
+            }
+        }
+
     }
 }
 
