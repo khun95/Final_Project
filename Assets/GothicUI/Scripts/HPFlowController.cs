@@ -26,7 +26,10 @@ namespace CrusaderUI.Scripts
 			}
 			else if(ControllerNum == 2)
             {
-				SetValue(PlayerController.staminaRate);
+				//SetValue(PlayerController.staminaRate);
+				_material.SetFloat("_FillLevel1", PlayerController.staminaRate);
+				_material.SetFloat("_FillLevel", PlayerController.mpRate);
+
 			}
         }
     }

@@ -11,23 +11,30 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform cameraArm;
     [SerializeField] GameObject sword1;
     [SerializeField] GameObject sword2;
+    [SerializeField] GameObject skill;
     [SerializeField] float moveSpeed;
     [SerializeField] float hp;
     [SerializeField] float maxHp;
     [SerializeField] float stamina = 100;
+    public static float mp;
+    [SerializeField] float maxMp;
     Animator animator;
     public static bool isLoaded;
     public static float hpRate = 1f;
+    public static float mpRate = 1f;
     public static float staminaRate = 1f;
     bool isEquip;
-    bool isMove;
+    bool isAttack = true;
     bool isDie;
+    bool isDive;
     public Action endAttackAnimeListner;
     void Start()
     {
         animator = charactorBody.GetComponent<Animator>();
         sword2.SetActive(false);
         StartCoroutine(StaminaHeal());
+        StartCoroutine(UsingSkill());
+        mp = maxMp;
     }
     private void Move()
     {
@@ -40,7 +47,7 @@ public class PlayerController : MonoBehaviour
             Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
             Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
 
-            charactorBody.forward = lookForward;
+            charactorBody.forward = moveDir;
             transform.position += moveDir * Time.deltaTime * moveSpeed;
         }
         //Debug.DrawRay(cameraArm.position, cameraArm.forward, Color.red);
@@ -49,8 +56,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         hpRate = hp/maxHp;
+        mpRate = mp / maxMp;
         staminaRate = stamina / 100;
-        if (!isMove)
+        if (isAttack)
         {
             if (!isEquip)
             {
@@ -83,10 +91,14 @@ public class PlayerController : MonoBehaviour
         }
         if (stamina >= 20)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (isEquip)
             {
-                animator.Play("tumbling");
-                stamina -= 20;
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    isDive = true;
+                    animator.Play("tumbling");
+                    stamina -= 20;
+                }
             }
         }
         if (!isDie)
@@ -103,8 +115,11 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.other.tag == "Monster")
         {
-            //animator.Play("Hit");
-            hp -= 10;
+            if (!isDive)
+            {
+                //animator.Play("Hit");
+                hp -= 10;
+            }
         }
     }
     void Equip()
@@ -118,6 +133,10 @@ public class PlayerController : MonoBehaviour
         sword1.SetActive(true);
     }
 
+    void IsDive()
+    {
+        isDive = false;
+    }
     void Attack()
     {
         sword2.GetComponent<BoxCollider>().enabled = true;
@@ -126,9 +145,18 @@ public class PlayerController : MonoBehaviour
     void EndAttack()
     {
         sword2.GetComponent<BoxCollider>().enabled = false;
-        endAttackAnimeListner();
+        if(endAttackAnimeListner != null)
+            endAttackAnimeListner();
         endAttackAnimeListner = null;
         Debug.Log("end");
+    }
+    void StartAttAnim()
+    {
+        isAttack = false;
+    }
+    void EndAttAnim()
+    {
+        isAttack = true;
     }
 
     IEnumerator StaminaHeal()
@@ -141,8 +169,33 @@ public class PlayerController : MonoBehaviour
 
                 stamina += 1;
             }
+            if(mp < maxMp && !skill.gameObject.activeSelf)
+            {
+                mp += 1;
+            }
         }
+    }
+    IEnumerator UsingSkill()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            if (mp > 0)
+            {
+                if (skill.gameObject.activeSelf)
+                {
+                    if (mp <= 10)
+                    {
+                        mp = 0;
+                    }
+                    else
+                    {
+                        mp -= 10;
+                    }
 
+                }
+            }
+        }
     }
 }
 

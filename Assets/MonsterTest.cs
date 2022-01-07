@@ -8,7 +8,7 @@ public class MonsterTest : MonoBehaviour
     // Start is called before the first frame update
     public float hp = 100;
     public float maxHp;
-    bool isHit = false;
+    public bool isHit = false;
     public Slider hpBar;
     private void Start()
     {
@@ -33,7 +33,7 @@ public class MonsterTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Hp : " + hp);
+        //Debug.Log("Hp : " + hp);
         if (hp <= 0)
         {
             hpBar.gameObject.SetActive(false);
