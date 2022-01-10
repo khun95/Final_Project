@@ -6,23 +6,22 @@ using TMPro;
 public class SwordAttack : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int att = 10;
+    public static int swordAtt = 10;
     [SerializeField] GameObject effectPos;
     [SerializeField] GameObject effect;
     [SerializeField] GameObject effectFactory;
     [SerializeField] GameObject enchant;
-    [SerializeField] Slider mainHpBar;
+    public Slider mainHpBar;
     [SerializeField] List<GameObject> effectPooling;
     [SerializeField] int poolingIndex = 0;
     [SerializeField] int poolingNum = 0;
     GameObject monster;
-    bool isDead;
+    public bool isDead = true;
     bool isEnchant;
     [SerializeField] TextMeshProUGUI monsterName;
 
     private void Awake()
     {
-        //poolingNum = 5;
         effectPooling = new List<GameObject>();
         for (int i = 0; i < poolingNum; i++)
         {
@@ -46,7 +45,15 @@ public class SwordAttack : MonoBehaviour
     {
         if(other.tag == "Monster")
         {
-            if (!other.GetComponent<MonsterTest>().isHit)
+            if (isDead)
+            {
+                monster = other.gameObject;
+                mainHpBar.gameObject.SetActive(true);;
+                monsterName.text = monster.gameObject.name;
+                Debug.Log(monster.name);
+                isDead = false;
+            }
+            if (!other.GetComponent<Monster>().isHit)
             {
 
                 effectPooling[poolingIndex].SetActive(true);
@@ -54,15 +61,7 @@ public class SwordAttack : MonoBehaviour
                 StartCoroutine(EffectsObjectPooling(poolingIndex));
                 // FindObjectOfType<PlayerController>().endAttackAnimeListner += EffectOff;
                 poolingIndex++;
-
-            }
-            if (isDead)
-            {
-                monster = other.gameObject;
-                mainHpBar.gameObject.SetActive(true);
-                monsterName.gameObject.SetActive(true);
-                monsterName.text = monster.gameObject.name;
-                isDead = false;
+                
             }
         }
     }
@@ -88,26 +87,28 @@ public class SwordAttack : MonoBehaviour
             }
             
         }
-        if (monster == null)
+
+        if(monster != null)
         {
-            //monsterName.gameObject.SetActive(false);
-            mainHpBar.gameObject.SetActive(false);
-            isDead = true;
+            if (monster.GetComponent<Monster>().hp <= 0)
+            {
+                isDead = true;
+                mainHpBar.gameObject.SetActive(false);
+            }
+            else
+            {
+                mainHpBar.value = monster.GetComponent<Monster>().hpBar.value;
+            }
         }
-        else
-        {
-            mainHpBar.value = monster.GetComponent<MonsterTest>().hpBar.value;
-        }
+        
+        
     }
 
     IEnumerator EffectsObjectPooling(int tempPoolingIndex)
     {
 
-  
         Debug.Log(effectPooling[tempPoolingIndex].name);
-
         yield return new WaitForSeconds(0.5f);
         effectPooling[tempPoolingIndex].SetActive(false);
-        Debug.Log("pooling");
     }
 }

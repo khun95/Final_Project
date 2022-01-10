@@ -7,6 +7,8 @@ TagManager:
   - Head
   - Monster
   - Sword
+  - MonsterHpbar
+  - MonsterWeapon
   layers:
   - Default
   - TransparentFX

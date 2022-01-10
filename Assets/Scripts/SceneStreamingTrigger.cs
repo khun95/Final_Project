@@ -16,7 +16,6 @@ public class SceneStreamingTrigger : MonoBehaviour
         if (!targetScene.isLoaded)
         {
             var op = SceneManager.LoadSceneAsync(targetSceneName, LoadSceneMode.Additive);
-            PlayerController.isLoaded = true;
             while (!op.isDone)
             {
                 yield return null;
@@ -33,7 +32,6 @@ public class SceneStreamingTrigger : MonoBehaviour
             SceneManager.MoveGameObjectToScene(GameObject.FindGameObjectWithTag("GameController"), currentScene);
             
             var op = SceneManager.UnloadSceneAsync(targetSceneName);
-            PlayerController.isLoaded = false;
             while (!op.isDone)
             {
                 yield return null;
@@ -47,8 +45,7 @@ public class SceneStreamingTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             var dir = Vector3.Angle(transform.forward, other.transform.position - transform.position);
-            Debug.Log(PlayerController.isLoaded);
-            if (!PlayerController.isLoaded)
+            if (true)
             {
 
                 StartCoroutine(StreamingTargetScene());

@@ -21,7 +21,6 @@ namespace CrusaderUI.Scripts
 		{
 			if (ControllerNum == 1)
 			{
-
 				SetValue(PlayerController.hpRate);
 			}
 			else if(ControllerNum == 2)

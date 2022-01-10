@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Charactor
 {
     // Start is called before the first frame update
     [SerializeField] Transform charactorBody;
@@ -13,20 +13,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject sword2;
     [SerializeField] GameObject skill;
     [SerializeField] float moveSpeed;
-    [SerializeField] float hp;
-    [SerializeField] float maxHp;
-    [SerializeField] float stamina = 100;
-    public static float mp;
-    [SerializeField] float maxMp;
-    Animator animator;
-    public static bool isLoaded;
-    public static float hpRate = 1f;
-    public static float mpRate = 1f;
-    public static float staminaRate = 1f;
+    //[SerializeField] float hp;
+    //[SerializeField] float maxHp;
+    //[SerializeField] float stamina = 100;
+    //[SerializeField] float maxMp;
+    //public static float mp;
+    //public static float hpRate = 1f;
+    //public static float mpRate = 1f;
+    //public static float staminaRate = 1f;
+
     bool isEquip;
     bool isAttack = true;
     bool isDie;
     bool isDive;
+    Animator animator;
     public Action endAttackAnimeListner;
     void Start()
     {
@@ -34,7 +34,11 @@ public class PlayerController : MonoBehaviour
         sword2.SetActive(false);
         StartCoroutine(StaminaHeal());
         StartCoroutine(UsingSkill());
+        //hp = 100;
+        maxHp = hp;
         mp = maxMp;
+        att = 10 + SwordAttack.swordAtt;
+
     }
     private void Move()
     {
@@ -50,14 +54,14 @@ public class PlayerController : MonoBehaviour
             charactorBody.forward = moveDir;
             transform.position += moveDir * Time.deltaTime * moveSpeed;
         }
-        //Debug.DrawRay(cameraArm.position, cameraArm.forward, Color.red);
     }
-    // Update is called once per frame
+
     void Update()
     {
-        hpRate = hp/maxHp;
+        hpRate = hp / maxHp;
         mpRate = mp / maxMp;
         staminaRate = stamina / 100;
+
         if (isAttack)
         {
             if (!isEquip)
@@ -118,8 +122,16 @@ public class PlayerController : MonoBehaviour
             if (!isDive)
             {
                 //animator.Play("Hit");
-                hp -= 10;
+                hp -= collision.other.gameObject.GetComponent<Monster>().att;
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "MonsterWeapon")
+        {
+            hp -= other.GetComponentInParent<Monster>().skillAtt;
         }
     }
     void Equip()
