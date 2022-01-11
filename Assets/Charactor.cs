@@ -5,6 +5,7 @@ using UnityEngine;
 public class Charactor : MonoBehaviour
 {
     // Start is called before the first frame update
+    public int att;
     public float hp;
     public float maxHp;
     public float stamina = 100;
@@ -13,7 +14,8 @@ public class Charactor : MonoBehaviour
     public static float hpRate = 1f;
     public static float mpRate = 1f;
     public static float staminaRate = 1f;
-    public int att;
+    public static int money;
+
     void Start()
     {
         

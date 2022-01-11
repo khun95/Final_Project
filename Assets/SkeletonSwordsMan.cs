@@ -6,11 +6,10 @@ using UnityEngine.AI;
 public class SkeletonSwordsMan : Monster
 {
     // Start is called before the first frame update
-
-
-    public GameObject chcaractor;
+    public GameObject charactor;
     public bool isSpawn = false;
     public bool isEnter = false;
+    public Attribute Attribute;
     Vector3 originPos;
     private void Start()
     {
@@ -21,6 +20,7 @@ public class SkeletonSwordsMan : Monster
         animator = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
         originPos = gameObject.transform.position;
+        charactor = GameObject.FindGameObjectWithTag("Player");
         //StartCoroutine(FindPlayer(chcaractor.transform.position));
 
     }
@@ -44,7 +44,7 @@ public class SkeletonSwordsMan : Monster
         if (isSpawn)
         {
             
-            if (Vector3.Distance(gameObject.transform.position, chcaractor.transform.position) <= 5)
+            if (Vector3.Distance(gameObject.transform.position, charactor.transform.position) <= 5)
             {
                 isEnter = true;
             }
@@ -52,7 +52,7 @@ public class SkeletonSwordsMan : Monster
             if (isEnter)
             {
                 animator.SetBool("isRun", true);
-                navAgent.SetDestination(chcaractor.transform.position);
+                navAgent.SetDestination(charactor.transform.position);
             }
 
             if (Vector3.Distance(gameObject.transform.position, originPos) > 10 && isEnter)
@@ -68,7 +68,7 @@ public class SkeletonSwordsMan : Monster
 
         }
 
-        if(Vector3.Distance(gameObject.transform.position, chcaractor.transform.position) <= 2)
+        if(Vector3.Distance(gameObject.transform.position, charactor.transform.position) <= 2)
         {
             animator.SetTrigger("isAttack");
         }

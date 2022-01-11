@@ -32,12 +32,12 @@ public class PlayerController : Charactor
     {
         animator = charactorBody.GetComponent<Animator>();
         sword2.SetActive(false);
-        StartCoroutine(StaminaHeal());
+        StartCoroutine(HealRecovery());
         StartCoroutine(UsingSkill());
         //hp = 100;
         maxHp = hp;
         mp = maxMp;
-        att = 10 + SwordAttack.swordAtt;
+        att = 5 + SwordAttack.swordAtt;
 
     }
     private void Move()
@@ -61,7 +61,7 @@ public class PlayerController : Charactor
         hpRate = hp / maxHp;
         mpRate = mp / maxMp;
         staminaRate = stamina / 100;
-
+        att = 5 + SwordAttack.swordAtt;
         if (isAttack)
         {
             if (!isEquip)
@@ -171,7 +171,7 @@ public class PlayerController : Charactor
         isAttack = true;
     }
 
-    IEnumerator StaminaHeal()
+    IEnumerator HealRecovery()
     {
         while (true)
         {

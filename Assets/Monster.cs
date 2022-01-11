@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 using UnityEngine.AI;
 public class Monster : MonoBehaviour
@@ -15,11 +16,12 @@ public class Monster : MonoBehaviour
     public int att;
     public int skillAtt;
     public Slider hpBar;
-    public static GameObject player;
     public NavMeshAgent navAgent;
+    public GameObject player;
+    public Action<Transform> dangerNotificationEvent;
 
     public Animator animator;
-    public enum attribute
+    public enum Attribute
     {
         Fire,
         Wind,
@@ -51,11 +53,18 @@ public class Monster : MonoBehaviour
                 Destroy(gameObject);
         }
     }
-    void Start()
+
+    private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        dangerNotificationEvent += SetDestination;
     }
-    private void OnTriggerEnter(Collider other)
+
+    public void SetDestination(Transform target)
+    {
+        GetComponent<NavMeshAgent>().SetDestination(target.position);
+    }
+
+private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Sword")
         {
@@ -92,5 +101,6 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 }

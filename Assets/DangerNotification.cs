@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class DangerNotification : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Monster")
+        if (other.GetComponent<Monster>() != null)
         {
-                //StartCoroutine(other.GetComponent<Monster>().FindPlayer());
+            transform.parent.GetComponent<Monster>().dangerNotificationEvent += other.GetComponent<Monster>().SetDestination;
+            Debug.Log(other.transform.name + "In DangerEvent");
+        }
+           
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<Monster>() != null)
+        {
+            transform.parent.GetComponent<Monster>().dangerNotificationEvent -= other.GetComponent<Monster>().SetDestination;
+            Debug.Log(other.transform.name + "Out DangerEvent");
         }
     }
 }

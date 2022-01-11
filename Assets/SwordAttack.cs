@@ -71,7 +71,14 @@ public class SwordAttack : MonoBehaviour
     {
         if (poolingIndex >= poolingNum)
             poolingIndex = 0;
-
+        if (isEnchant)
+        {
+            swordAtt = 20;
+        }
+        else
+        {
+            swordAtt = 10;
+        }
         if (PlayerController.mp <= 0)
         {
             isEnchant = false;
@@ -81,7 +88,6 @@ public class SwordAttack : MonoBehaviour
         {
             if(PlayerController.mp >= 10)
             {
-
                 isEnchant = !isEnchant;
                 enchant.SetActive(isEnchant);
             }
