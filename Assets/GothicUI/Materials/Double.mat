@@ -84,7 +84,7 @@ Material:
     - _DstBlend: 0
     - _FadeAreaHeight: 0.1293
     - _FadeAreaHeight1: 0.05
-    - _FillLevel: 1
+    - _FillLevel: 0
     - _FillLevel1: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5

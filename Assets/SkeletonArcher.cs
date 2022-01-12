@@ -8,83 +8,71 @@ public class SkeletonArcher : Monster
     // Start is called before the first frame update
     public GameObject charactor;
     public GameObject arrow;
-    public bool isSpawn = false;
-    public bool isEnter = false;
+    public GameObject arrowPos;
+    //public bool isSpawn = false;
+    //public bool isEnter = false;
+    //public bool isChase;
+    //Vector3 originPos;
     public Attribute Attribute;
-    Vector3 originPos;
     private void Start()
     {
-        hp = 100;
-        maxHp = hp;
-        att = 5;
-        skillAtt = 10;
-        animator = GetComponent<Animator>();
-        navAgent = GetComponent<NavMeshAgent>();
-        originPos = gameObject.transform.position;
-        charactor = GameObject.FindGameObjectWithTag("Player");
-        //StartCoroutine(FindPlayer(chcaractor.transform.position));
+        base.Start();
+        monsterType = 2;
+        //maxHp = hp;
+        ////hp = 100;
+        ////att = 5;
+        ////skillAtt = 10;
+        //animator = GetComponent<Animator>();
+        //navAgent = GetComponent<NavMeshAgent>();
+        //originPos = gameObject.transform.position;
+        //charactor = GameObject.FindGameObjectWithTag("Player");
 
     }
-    void CheckSpawn()
+    void ShootingArrow()
     {
-        isSpawn = true;
+        isAttack = true;
+        GameObject temp = Instantiate(arrow, arrowPos.transform.position, Quaternion.identity);
+        temp.GetComponent<Bullet>().att = skillAtt;
     }
     // Update is called once per frame
     void Update()
     {
         HPCheck();
-        Debug.Log(Vector3.Distance(gameObject.transform.position, originPos));
-        if (hp <= 0)
-        {
-            isHit = true;
-            animator.Play("Die");
-            hpBar.gameObject.SetActive(false);
-            navAgent.enabled = false;
-            Die();  
-        }
-        if (isSpawn)
-        {
-
-            if (Vector3.Distance(gameObject.transform.position, charactor.transform.position) <= 10)
-            {
-                isEnter = true;
-            }
-
-            if (isEnter)
-            {
-                animator.SetBool("isRun", true);
-                navAgent.SetDestination(charactor.transform.position);
-            }
-
-            if (Vector3.Distance(gameObject.transform.position, originPos) > 20 && isEnter)
-            {
-                navAgent.SetDestination(originPos);
-                isEnter = false;
-            }
-
-            if (Vector3.Distance(gameObject.transform.position, originPos) < 2)
-            {
-                animator.SetBool("isRun", false);
-            }
-
-        }
-
-        if (Vector3.Distance(gameObject.transform.position, charactor.transform.position) <= 5)
-        {
-            animator.SetTrigger("isAttack");
-        }
+        Die();
+        MonsterMove(player, 10, 10, 15);
+    //    if (isSpawn)
+    //    {
+    //        if (Vector3.Distance(gameObject.transform.position, originPos) > 10 && isEnter) // 원래자리보다 멀어질경우
+    //        {
+    //            isEnter = false;
+    //            navAgent.SetDestination(originPos);
+    //            Debug.Log("back");
+    //        }
+    //        else if (Vector3.Distance(gameObject.transform.position, charactor.transform.position) <= 20)
+    //        {
+    //            isEnter = true;
+    //        }
 
 
-    }
+    //        if (isEnter)
+    //        {
+    //            animator.SetBool("isRun", true);
+    //            navAgent.SetDestination(charactor.transform.position);
+    //            Debug.Log("chase");
+    //        }
 
-    IEnumerator FindPlayer(Vector3 target)
-    {
-        navAgent.enabled = true;
-        while (navAgent.SetDestination(target))
-        {
-            animator.SetBool("isRun", true);
-            yield return null;
-        }
+
+    //        if (Vector3.Distance(gameObject.transform.position, originPos) < 2) // 원래 자리로돌아 갔을경우
+    //        {
+    //            animator.SetBool("isRun", false);
+    //        }
+
+    //    }
+    //    if (Vector3.Distance(gameObject.transform.position, charactor.transform.position) <= 15) // 공격 범위
+    //    {
+    //        gameObject.transform.LookAt(charactor.transform);
+    //        animator.SetTrigger("isAttack");
+    //    }
     }
 }
 

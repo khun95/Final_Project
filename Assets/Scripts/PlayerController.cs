@@ -131,7 +131,14 @@ public class PlayerController : Charactor
     {
         if(other.tag == "MonsterWeapon")
         {
-            hp -= other.GetComponentInParent<Monster>().skillAtt;
+            if(other.GetComponent<Bullet>() != null)
+            {
+                hp -= other.GetComponentInParent<Bullet>().att;
+                Debug.Log("ÇÇ°Ý");
+                Destroy(other.gameObject);
+            }
+            else
+                hp -= other.GetComponentInParent<Monster>().skillAtt;
         }
     }
     void Equip()
