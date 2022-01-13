@@ -13,6 +13,8 @@ public class PlayerController : Charactor
     [SerializeField] GameObject sword2;
     [SerializeField] GameObject skill;
     [SerializeField] float moveSpeed;
+    [SerializeField] List<GameObject> sword_Hands;
+    [SerializeField] List<GameObject> sword_Backs;
     //[SerializeField] float hp;
     //[SerializeField] float maxHp;
     //[SerializeField] float stamina = 100;
@@ -21,24 +23,31 @@ public class PlayerController : Charactor
     //public static float hpRate = 1f;
     //public static float mpRate = 1f;
     //public static float staminaRate = 1f;
-
     bool isEquip;
     bool isAttack = true;
     bool isDie;
     bool isDive;
+    bool isEnchant;
     Animator animator;
     public Action endAttackAnimeListner;
     void Start()
     {
         animator = charactorBody.GetComponent<Animator>();
+        for (int i = 0; i < sword_Hands.Count; i++)
+        {
+            if (i == Charactor.currentSwordNum)
+            {
+                sword1 = sword_Backs[i];
+                sword2 = sword_Hands[i];
+            }
+        }
+        sword1.SetActive(true);
         sword2.SetActive(false);
         StartCoroutine(HealRecovery());
         StartCoroutine(UsingSkill());
-        //hp = 100;
         maxHp = hp;
         mp = maxMp;
         att = 5 + SwordAttack.swordAtt;
-
     }
     private void Move()
     {
@@ -58,6 +67,10 @@ public class PlayerController : Charactor
 
     void Update()
     {
+        if (sword2.GetComponent<SwordAttack>() != null)
+        {
+            isEnchant = sword2.GetComponent<SwordAttack>().isEnchant;
+        }
         hpRate = hp / maxHp;
         mpRate = mp / maxMp;
         staminaRate = stamina / 100;
@@ -117,7 +130,7 @@ public class PlayerController : Charactor
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.other.tag == "Monster")
+        if (collision.other.tag == "Monster" || collision.other.tag == "Boss")
         {
             if (!isDive)
             {
@@ -126,19 +139,29 @@ public class PlayerController : Charactor
             }
         }
     }
-
+    private void OnParticleTrigger()
+    {
+        Debug.Log("충돌");
+    }
+    private void OnParticleCollision(GameObject other)
+    {
+        Debug.Log("충돌콜");
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "MonsterWeapon")
         {
-            if(other.GetComponent<Bullet>() != null)
+            if (other.GetComponent<Bullet>() != null)
             {
                 hp -= other.GetComponentInParent<Bullet>().att;
                 Debug.Log("피격");
                 Destroy(other.gameObject);
             }
             else
+            {
                 hp -= other.GetComponentInParent<Monster>().skillAtt;
+                Debug.Log("스킬 피격");
+            }
         }
     }
     void Equip()
@@ -201,7 +224,7 @@ public class PlayerController : Charactor
             yield return new WaitForSeconds(1f);
             if (mp > 0)
             {
-                if (skill.gameObject.activeSelf)
+                if (isEnchant)
                 {
                     if (mp <= 10)
                     {
@@ -211,7 +234,6 @@ public class PlayerController : Charactor
                     {
                         mp -= 10;
                     }
-
                 }
             }
         }
