@@ -11,6 +11,7 @@ public class Monster : MonoBehaviour
     public float hp;
     public float maxHp;
     public bool isHit = false;
+    public bool isIdle;
     public bool isDie;
     public bool isSpawn = false;
     public bool isAttack;
@@ -27,6 +28,8 @@ public class Monster : MonoBehaviour
     public int monsterType;
     public Vector3 originPos;
     public Vector3 prevPos;
+    public GameObject coin;
+    public int coinCount;
     public enum Attribute
     {
         Fire,
@@ -43,6 +46,10 @@ public class Monster : MonoBehaviour
         originPos = gameObject.transform.position;
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(HealRecovery());
+    }
+    public void CheckIdle()
+    {
+        isIdle = true;
     }
     public void HitStart()
     {
@@ -75,12 +82,15 @@ public class Monster : MonoBehaviour
             yield return new WaitForSeconds(1f);
             if (isOrigin)
             {
-                if (hp < maxHp)
+                if (isIdle)
                 {
-                    hp += 10;
-                    if (hp > maxHp)
+                    if (hp < maxHp)
                     {
-                        hp = maxHp;
+                        hp += 10;
+                        if (hp > maxHp)
+                        {
+                            hp = maxHp;
+                        }
                     }
                 }
             }
@@ -115,6 +125,7 @@ public class Monster : MonoBehaviour
             {
                 isEnter = true;
                 isOrigin = false;
+                isIdle = false;
             }
 
             if (isEnter)
@@ -149,9 +160,10 @@ public class Monster : MonoBehaviour
             animator.SetTrigger("isAttack");
         }
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1") || animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1") || animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2") || animator.GetCurrentAnimatorStateInfo(0).IsName("Spell1"))
         {
             transform.position = prevPos;
+            isIdle = false;
         }
 
         prevPos = transform.position;
@@ -169,6 +181,8 @@ public class Monster : MonoBehaviour
     public void Die() {
         if (hp <= 0)
         {
+            coin.GetComponent<Coin>().coinValue = coinCount;
+            coin.SetActive(true);
             isHit = true;
             animator.Play("Die");
             hpBar.gameObject.SetActive(false);

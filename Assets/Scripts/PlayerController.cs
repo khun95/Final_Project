@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-
+using UnityEngine.SceneManagement;
 public class PlayerController : Charactor
 {
     // Start is called before the first frame update
@@ -26,6 +26,7 @@ public class PlayerController : Charactor
     bool isEquip;
     bool isAttack = true;
     bool isDie;
+    bool isDead;
     bool isDive;
     bool isEnchant;
     Animator animator;
@@ -33,10 +34,11 @@ public class PlayerController : Charactor
     void Start()
     {
         animator = charactorBody.GetComponent<Animator>();
+        //Charactor.currentSwordNum = SwordNum;
         for (int i = 0; i < sword_Hands.Count; i++)
         {
             if (i == Charactor.currentSwordNum)
-            {
+            {   
                 sword1 = sword_Backs[i];
                 sword2 = sword_Hands[i];
             }
@@ -64,9 +66,30 @@ public class PlayerController : Charactor
             transform.position += moveDir * Time.deltaTime * moveSpeed;
         }
     }
+    public void ChangeSwords()
+    {
+        for (int i = 0; i < sword_Hands.Count; i++)
+        {
+            sword1.SetActive(false);
+            sword2.SetActive(false);
+            if (i == Charactor.currentSwordNum)
+            {
+                sword1 = sword_Backs[i];
+                sword2 = sword_Hands[i];
+                sword1.SetActive(true);
+                sword2.SetActive(false);
+                break;
+            }
+            else if (i != Charactor.currentSwordNum)
+            {
 
+            }
+        }
+    }
     void Update()
     {
+        //Debug.Log(Charactor.currentSwordNum);
+        //Debug.Log(money);
         if (sword2.GetComponent<SwordAttack>() != null)
         {
             isEnchant = sword2.GetComponent<SwordAttack>().isEnchant;
@@ -93,17 +116,19 @@ public class PlayerController : Charactor
             animator.SetBool("isEquip", false);
             isEquip = false;
         }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (mapNum == 1)
         {
-            if (!isEquip)
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                animator.SetBool("isEquip", true);
-                isEquip = true;
-            }
-            else
-            {
+                if (!isEquip)
+                {
+                    animator.SetBool("isEquip", true);
+                    isEquip = true;
+                }
+                else
+                {
                     animator.SetTrigger("isSlash1");
+                }
             }
         }
         if (stamina >= 20)
@@ -125,6 +150,10 @@ public class PlayerController : Charactor
                 animator.Play("Die");
                 isDie = true;
             }
+        }
+        if (isDead)
+        {
+            SceneManager.LoadScene("GameOverScene");
         }
 
     }
@@ -174,7 +203,10 @@ public class PlayerController : Charactor
         sword2.SetActive(false);
         sword1.SetActive(true);
     }
-
+    void DieCheck()
+    {
+        isDead = true;
+    }
     void IsDive()
     {
         isDive = false;

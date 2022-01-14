@@ -16,6 +16,7 @@ public class SwordAttack : MonoBehaviour
     [SerializeField] TextMeshProUGUI monsterName;
     public Slider mainHpBar;
     public Slider BossBerserkeBar;
+    public Image imageSkill;
     GameObject monster;
     public bool isDead = true;
     public bool isEnchant;
@@ -37,6 +38,7 @@ public class SwordAttack : MonoBehaviour
     {
         maxBerserkTime = berserkTime;
         mainHpBar.gameObject.SetActive(false);
+        StartCoroutine(CoolTime(3f,3f));
     }
     private void OnEnable()
     {
@@ -55,7 +57,6 @@ public class SwordAttack : MonoBehaviour
                 monster = other.gameObject;
                 mainHpBar.gameObject.SetActive(true);;
                 monsterName.text = monster.gameObject.name;
-                Debug.Log(monster.name);
                 isDead = false;
             }
             if (!other.GetComponent<Monster>().isHit)
@@ -73,7 +74,7 @@ public class SwordAttack : MonoBehaviour
             {
                 monster = other.gameObject;
                 BossBerserkeBar.gameObject.SetActive(true);
-                mainHpBar.gameObject.SetActive(true); ;
+                mainHpBar.gameObject.SetActive(true);
                 monsterName.text = monster.gameObject.name;
                 Debug.Log(monster.name);
                 isDead = false;
@@ -87,6 +88,27 @@ public class SwordAttack : MonoBehaviour
 
             }
         }
+    }
+    IEnumerator CoolTime(float currentCool, float maxCool)
+    {
+        Debug.Log("cooltime");
+        while(true)
+        {
+            if (isEnchant)
+            {
+                if (currentCool < 0)
+                    currentCool = maxCool;
+                currentCool -= Time.deltaTime;
+                imageSkill.fillAmount = currentCool / maxCool;
+                yield return new WaitForFixedUpdate();
+            }
+            else
+            {
+                imageSkill.fillAmount = 1;
+                yield return new WaitForFixedUpdate();
+            }
+        }
+        Debug.Log("cooltime End");
     }
 
     // Update is called once per frame
@@ -113,12 +135,19 @@ public class SwordAttack : MonoBehaviour
             {
                 isEnchant = !isEnchant;
                 enchant.SetActive(isEnchant);
+                //StartCoroutine(CoolTime(3f));
             }
             
         }
 
         if(monster != null)
         {
+            if (monster.GetComponent<Monster>().isEnter == false)
+            {
+                Debug.Log("off");
+                isDead = true;
+                mainHpBar.gameObject.SetActive(false);
+            }
             if (monster.GetComponent<Monster>().hp <= 0)
             {
                 isDead = true;

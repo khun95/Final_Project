@@ -51,6 +51,10 @@ public class SkeletonBoss : Monster
                 isUseSkill = true;
             }
         }
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Spell1"))
+        {
+            isHit = true;
+        }
     }
 
     IEnumerator FindPlayer(Vector3 target)

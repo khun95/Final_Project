@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/BaseCamp.unity
+    guid: 1296890d3aa917841b465e85b00bbfa7
+  - enabled: 1
+    path: Assets/Scenes/Scene/Crystal_Cave.unity
+    guid: 13753c81b8c4f02478952d6ab14498ab
+  - enabled: 1
     path: Assets/Scenes/Scene/Boss_Area.unity
     guid: 62377df5cadb9f34abd18d96f8fe9a2f
   - enabled: 1
@@ -20,12 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene/New Folder/Corridor_Wood.unity
     guid: a60ffbe1213849d429ffc8064ddd7664
-  - enabled: 1
-    path: Assets/Scenes/Scene/Crypt.unity
-    guid: a1f4f79d4afc8994cbe7796f22d172a5
-  - enabled: 1
-    path: Assets/Scenes/Scene/Crystal_Cave.unity
-    guid: 13753c81b8c4f02478952d6ab14498ab
   - enabled: 1
     path: Assets/Scenes/Scene/Kitchen.unity
     guid: 06422637195080944b92ff01522b67b2
@@ -42,9 +42,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene/Main_Area.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Scene/Shirne.unity
-    guid: a02d0055d4840e9439bd302d2116ef39
-  - enabled: 1
     path: Assets/Scenes/Scene/Storage.unity
     guid: 6953b2be4124e8d4f9c213f4d0101535
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: 22e7f3d71fe7fa94ebeaead0e08478af
   m_configObjects: {}

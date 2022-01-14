@@ -11,6 +11,7 @@ TagManager:
   - MonsterWeapon
   - BulletPoint
   - Boss
+  - Head2
   layers:
   - Default
   - TransparentFX
