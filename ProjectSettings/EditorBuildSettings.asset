@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 29a4f11e6ef46a64e8237214fef094a3
+  - enabled: 1
     path: Assets/Scenes/BaseCamp.unity
     guid: 1296890d3aa917841b465e85b00bbfa7
   - enabled: 1
@@ -47,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOverScene.unity
     guid: 22e7f3d71fe7fa94ebeaead0e08478af
+  - enabled: 1
+    path: Assets/Scenes/Options.unity
+    guid: 4a56897b6cc5d8449b72782254bac33e
   m_configObjects: {}

@@ -11,7 +11,19 @@ public class SceneController : MonoBehaviour
     }
     public void BaseCampLoad()
     {
+        SceneManager.LoadScene(1);
+    }
+    public void TitleLoad()
+    {
         SceneManager.LoadScene(0);
+    }
+    public void OptionsLoad()
+    {
+        SceneManager.LoadScene("Options");
+    }
+    public void ExitLoad()
+    {
+        Application.Quit();
     }
     // Update is called once per frame
     void Update()

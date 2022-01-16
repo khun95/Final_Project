@@ -17,11 +17,11 @@ public class RitualController : MonoBehaviour
     {
         if (mapNums == 0)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
         else if (mapNums == 1)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
     }
     public void CancleBoard()

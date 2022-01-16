@@ -192,6 +192,10 @@ public class PlayerController : Charactor
                 Debug.Log("스킬 피격");
             }
         }
+        if(other.tag == "Trap")
+        {
+            hp -= 100;
+        }
     }
     void Equip()
     {

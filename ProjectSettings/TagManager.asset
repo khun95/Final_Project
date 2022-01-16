@@ -12,6 +12,7 @@ TagManager:
   - BulletPoint
   - Boss
   - Head2
+  - Trap
   layers:
   - Default
   - TransparentFX
