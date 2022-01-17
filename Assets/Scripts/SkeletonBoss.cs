@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 public class SkeletonBoss : Monster
 {
     // Start is called before the first frame update
@@ -33,11 +34,33 @@ public class SkeletonBoss : Monster
         skillAtt = 200;
         berserkeEffect.SetActive(true);
     }
+    public virtual void Die()
+    {
+        if (hp <= 0)
+        {
+            coin.GetComponent<Coin>().coinValue = coinCount;
+            coin.SetActive(true);
+            isHit = true;
+            animator.Play("Die");
+            hpBar.gameObject.SetActive(false);
+            navAgent.enabled = false;
+            if (isDie)
+            {
+                Destroy(gameObject);
+                SceneManager.LoadScene("BossClear");
+            }
+        }
+    }
+    public void BossCoin()
+    {
+        Charactor.money += 1000;
+    }
     // Update is called once per frame
     void Update()
     {
         HPCheck();
         Die();
+
         MonsterMove(player, 5, 20, 3);
         if (BerserkeBarTimeController.isBerserk)
         {

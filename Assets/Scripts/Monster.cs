@@ -230,14 +230,6 @@ private void OnTriggerEnter(Collider other)
         }
     }
 
-    //public IEnumerator FindPlayer()
-    //{
-    //    navAgent.enabled = true;
-    //    while (navAgent.SetDestination(player.transform.position))
-    //    {
-    //        yield return null;
-    //    }
-    //}
 
     // Update is called once per frame
     void Update()

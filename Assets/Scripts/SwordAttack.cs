@@ -73,8 +73,8 @@ public class SwordAttack : MonoBehaviour
             if (isDead)
             {
                 monster = other.gameObject;
-                BossBerserkeBar.gameObject.SetActive(true);
                 mainHpBar.gameObject.SetActive(true);
+                BossBerserkeBar.gameObject.SetActive(true);
                 monsterName.text = monster.gameObject.name;
                 Debug.Log(monster.name);
                 isDead = false;
@@ -147,11 +147,13 @@ public class SwordAttack : MonoBehaviour
                 Debug.Log("off");
                 isDead = true;
                 mainHpBar.gameObject.SetActive(false);
+                BossBerserkeBar.gameObject.SetActive(false);
             }
             if (monster.GetComponent<Monster>().hp <= 0)
             {
                 isDead = true;
                 mainHpBar.gameObject.SetActive(false);
+                BossBerserkeBar.gameObject.SetActive(false);
             }
             else
             {

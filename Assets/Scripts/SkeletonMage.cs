@@ -27,38 +27,6 @@ public class SkeletonMage : Monster
         HPCheck();
         Die();
         MonsterMove(player, 10, 10, 15);
-        //if (isSpawn)
-        //{
-
-        //    if (Vector3.Distance(gameObject.transform.position, charactor.transform.position) <= 10)
-        //    {
-        //        isEnter = true;
-        //    }
-
-        //    if (isEnter)
-        //    {
-        //        animator.SetBool("isRun", true);
-        //        navAgent.SetDestination(charactor.transform.position);
-        //    }
-
-        //    if (Vector3.Distance(gameObject.transform.position, originPos) > 20 && isEnter)
-        //    {
-        //        navAgent.SetDestination(originPos);
-        //        isEnter = false;
-        //    }
-
-        //    if (Vector3.Distance(gameObject.transform.position, originPos) < 2)
-        //    {
-        //        animator.SetBool("isRun", false);
-        //    }
-
-        //}
-
-        //if (Vector3.Distance(gameObject.transform.position, charactor.transform.position) <= 15)
-        //{
-        //    gameObject.transform.LookAt(charactor.transform);
-        //    animator.SetTrigger("isAttack");
-        //}
     }
 
 }

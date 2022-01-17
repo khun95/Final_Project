@@ -53,4 +53,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Options.unity
     guid: 4a56897b6cc5d8449b72782254bac33e
+  - enabled: 1
+    path: Assets/Scenes/BossClear.unity
+    guid: 28d9bf86cd68ba547ad819e32839df26
   m_configObjects: {}
