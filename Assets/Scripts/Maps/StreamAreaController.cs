@@ -9,7 +9,6 @@ public class StreamAreaController : MonoBehaviour
     [SerializeField] private string loadSceneName;
     [SerializeField] string sendObjScene;
 
-    bool isLoaded;
     IEnumerator StreamingTargetScene()
     {
         var targetScene = SceneManager.GetSceneByName(loadSceneName);

@@ -5,13 +5,12 @@ using UnityEngine;
 public class NpcController : MonoBehaviour
 {
 	private GameObject player;
-	public GameObject panel;
+	[SerializeField] GameObject panel;
 	private bool playerEntered;
 	private bool showInteractMsg;
 	private GUIStyle guiStyle;
 	private string msg;
 
-	private int rayLayerMask;
 
 	void Start()
 	{

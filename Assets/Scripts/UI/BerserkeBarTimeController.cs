@@ -6,9 +6,9 @@ using TMPro;
 public class BerserkeBarTimeController : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Slider BossBerserkeBar;
-    public float berserkTime;
-    public float maxBerserkTime;
+    [SerializeField] Slider BossBerserkeBar;
+    [SerializeField] float berserkTime;
+    float maxBerserkTime;
     public static bool isBerserk;
     [SerializeField] TextMeshProUGUI timeText;
     void Start()

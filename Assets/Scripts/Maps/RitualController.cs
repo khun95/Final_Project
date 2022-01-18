@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class RitualController : MonoBehaviour
 {
-    public int mapNums;
-    public GameObject panel;
-    public TextMeshProUGUI tmpText;
+    [SerializeField] int mapNums;
+    [SerializeField] GameObject panel;
+    [SerializeField] TextMeshProUGUI tmpText;
     // Start is called before the first frame update
     public void SceneChange()
     {

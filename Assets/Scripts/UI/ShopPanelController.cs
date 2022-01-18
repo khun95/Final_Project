@@ -6,25 +6,25 @@ using TMPro;
 public class ShopPanelController : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject smallBoard1;
-    public GameObject smallBoard2;
-    public GameObject player;
-    public GameObject Panel;
-    public TextMeshProUGUI moneyText;
-    public void CloseShop()
+    [SerializeField] GameObject smallBoard1;
+    [SerializeField] GameObject smallBoard2;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject Panel;
+    [SerializeField] TextMeshProUGUI moneyText;
+    void CloseShop()
     {
         gameObject.SetActive(false);
     }
-    public void CloseSmallBoard1()
+    void CloseSmallBoard1()
     {
         smallBoard1.gameObject.SetActive(false);
     }
-    public void CloseSmallBoard2()
+    void CloseSmallBoard2()
     {
         smallBoard2.gameObject.SetActive(false);
     }
 
-    public void BuySword0()
+    void BuySword0()
     {
         if(Charactor.money > 100)
         {
@@ -39,7 +39,7 @@ public class ShopPanelController : MonoBehaviour
         }
     }
 
-    public void BuySword1()
+    void BuySword1()
     {
         if (Charactor.money > 100)
         {
@@ -54,7 +54,7 @@ public class ShopPanelController : MonoBehaviour
             smallBoard2.SetActive(true);
         }
     }
-    public void BuySword2()
+    void BuySword2()
     {
         if (Charactor.money > 100)
         {
@@ -68,7 +68,7 @@ public class ShopPanelController : MonoBehaviour
             smallBoard2.SetActive(true);
         }
     }
-    public void BuySword3()
+    void BuySword3()
     {
         if (Charactor.money > 100)
         {
