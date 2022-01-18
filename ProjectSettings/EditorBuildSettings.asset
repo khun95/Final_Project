@@ -12,40 +12,40 @@ EditorBuildSettings:
     path: Assets/Scenes/BaseCamp.unity
     guid: 1296890d3aa917841b465e85b00bbfa7
   - enabled: 1
-    path: Assets/Scenes/Scene/Crystal_Cave.unity
+    path: Assets/Scenes/StreamingScene/Crystal_Cave.unity
     guid: 13753c81b8c4f02478952d6ab14498ab
   - enabled: 1
-    path: Assets/Scenes/Scene/Boss_Area.unity
+    path: Assets/Scenes/StreamingScene/Boss_Area.unity
     guid: 62377df5cadb9f34abd18d96f8fe9a2f
   - enabled: 1
-    path: Assets/Scenes/Scene/Center_Hall.unity
+    path: Assets/Scenes/StreamingScene/Center_Hall.unity
     guid: 0798ab7783b667249bb617d9b29c600e
   - enabled: 1
-    path: Assets/Scenes/Scene/New Folder/Corridor_Royal.unity
+    path: Assets/Scenes/StreamingScene/New Folder/Corridor_Royal.unity
     guid: 40a85848678390b4a8f16c43c2f554d3
   - enabled: 1
-    path: Assets/Scenes/Scene/New Folder/Corridor_Stone.unity
+    path: Assets/Scenes/StreamingScene/New Folder/Corridor_Stone.unity
     guid: f611fd17590707a42846cbf8ee519ecd
   - enabled: 1
-    path: Assets/Scenes/Scene/New Folder/Corridor_Wood.unity
+    path: Assets/Scenes/StreamingScene/New Folder/Corridor_Wood.unity
     guid: a60ffbe1213849d429ffc8064ddd7664
   - enabled: 1
-    path: Assets/Scenes/Scene/Kitchen.unity
+    path: Assets/Scenes/StreamingScene/Kitchen.unity
     guid: 06422637195080944b92ff01522b67b2
   - enabled: 1
-    path: Assets/Scenes/Scene/Lab.unity
+    path: Assets/Scenes/StreamingScene/Lab.unity
     guid: 5149728e3240abb4ca734442f6051607
   - enabled: 1
-    path: Assets/Scenes/Scene/Library.unity
+    path: Assets/Scenes/StreamingScene/Library.unity
     guid: eaf93da61444a9549ad711dfd3e7a252
   - enabled: 1
-    path: Assets/Scenes/Scene/Long_Hall.unity
+    path: Assets/Scenes/StreamingScene/Long_Hall.unity
     guid: 9599472df1f680140996d3d95a632d9d
   - enabled: 1
-    path: Assets/Scenes/Scene/Main_Area.unity
+    path: Assets/Scenes/StreamingScene/Main_Area.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Scene/Storage.unity
+    path: Assets/Scenes/StreamingScene/Storage.unity
     guid: 6953b2be4124e8d4f9c213f4d0101535
   - enabled: 1
     path: Assets/Scenes/GameOverScene.unity
