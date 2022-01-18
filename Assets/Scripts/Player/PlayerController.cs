@@ -15,14 +15,6 @@ public class PlayerController : Charactor
     [SerializeField] float moveSpeed;
     [SerializeField] List<GameObject> sword_Hands;
     [SerializeField] List<GameObject> sword_Backs;
-    //[SerializeField] float hp;
-    //[SerializeField] float maxHp;
-    //[SerializeField] float stamina = 100;
-    //[SerializeField] float maxMp;
-    //public static float mp;
-    //public static float hpRate = 1f;
-    //public static float mpRate = 1f;
-    //public static float staminaRate = 1f;
     bool isEquip;
     bool isAttack = true;
     bool isDie;
@@ -168,14 +160,7 @@ public class PlayerController : Charactor
             }
         }
     }
-    private void OnParticleTrigger()
-    {
-        Debug.Log("충돌");
-    }
-    private void OnParticleCollision(GameObject other)
-    {
-        Debug.Log("충돌콜");
-    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "MonsterWeapon")

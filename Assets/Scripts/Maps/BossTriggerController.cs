@@ -5,11 +5,7 @@ using UnityEngine;
 public class BossTriggerController : MonoBehaviour
 {
     [SerializeField] GameObject boss;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
@@ -18,9 +14,4 @@ public class BossTriggerController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

@@ -9,7 +9,6 @@ public class BossAreaTrigger : MonoBehaviour
     public GameObject mainCamera;
     public GameObject cameraPos;
     public GameObject newHeadPos;
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Head");
@@ -23,10 +22,5 @@ public class BossAreaTrigger : MonoBehaviour
             doors.GetComponent<DoorObjectController>().enabled = false;
             player.transform.position = newHeadPos.transform.position;
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

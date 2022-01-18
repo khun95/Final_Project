@@ -8,17 +8,12 @@ public class SkeletonBoss : Monster
     // Start is called before the first frame update
     [SerializeField] GameObject berserkeEffect;
     [SerializeField] GameObject skill1;
-    public Attribute Attribute;
+    [SerializeField] Attribute Attribute;
     bool isUseSkill;
     private void Start()
     {
         base.Start();
         monsterType = 3;
-        //maxHp = hp;
-        //animator = GetComponent<Animator>();
-        //navAgent = GetComponent<NavMeshAgent>();
-        //originPos = gameObject.transform.position;
-        //charactor = GameObject.FindGameObjectWithTag("Player");
     }
     void UseSkill1()
     {

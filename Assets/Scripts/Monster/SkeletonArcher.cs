@@ -6,9 +6,9 @@ using UnityEngine.AI;
 public class SkeletonArcher : Monster
 {
     // Start is called before the first frame update
-    public GameObject charactor;
-    public GameObject arrow;
-    public GameObject arrowPos;
+
+    [SerializeField] GameObject arrow;
+    [SerializeField] GameObject arrowPos;
 
     public Attribute Attribute;
     private void Start()

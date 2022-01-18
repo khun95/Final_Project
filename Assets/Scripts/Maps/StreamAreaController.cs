@@ -31,16 +31,6 @@ public class StreamAreaController : MonoBehaviour
         if (targetScene.isLoaded)
         {
             var currentScene = SceneManager.GetSceneByName(sendObjScene);
-
-            //for(int i=0;i<SceneManager.sceneCount;i++)
-            //{
-            //    if(SceneManager.GetActiveScene() != SceneManager.GetSceneAt(i))
-            //    {
-            //        currentScene= SceneManager.GetSceneAt(i);
-            //    }
-            //}
-
-          //  Debug.Log(currentScene.name);
             SceneManager.MoveGameObjectToScene(GameObject.FindGameObjectWithTag("GameController"), currentScene);
 
             var op = SceneManager.UnloadSceneAsync(loadSceneName);
@@ -66,15 +56,5 @@ public class StreamAreaController : MonoBehaviour
         {
             StartCoroutine(UnloadStreamingScene());
         }
-    }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

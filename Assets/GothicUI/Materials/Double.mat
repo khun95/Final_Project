@@ -85,7 +85,7 @@ Material:
     - _FadeAreaHeight: 0.1293
     - _FadeAreaHeight1: 0.05
     - _FillLevel: 1
-    - _FillLevel1: 1
+    - _FillLevel1: 0.74
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

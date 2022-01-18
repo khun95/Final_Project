@@ -9,10 +9,6 @@ public class RitualController : MonoBehaviour
     public GameObject panel;
     public TextMeshProUGUI tmpText;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
     public void SceneChange()
     {
         if (mapNums == 0)
@@ -44,9 +40,4 @@ public class RitualController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

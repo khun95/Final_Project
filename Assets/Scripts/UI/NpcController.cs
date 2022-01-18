@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class NpcController : MonoBehaviour
 {
-	private float reachRange = 2f;
-
-	private Animator anim;
-	private Camera fpsCam;
 	private GameObject player;
-	private const string animBoolName = "isOpen";
 	public GameObject panel;
 	private bool playerEntered;
 	private bool showInteractMsg;
@@ -22,7 +17,6 @@ public class NpcController : MonoBehaviour
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
 		setupGui();
-
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -64,9 +58,6 @@ public class NpcController : MonoBehaviour
 			}
         }
     }
-
-	
-
 
 	#region GUI Config
 

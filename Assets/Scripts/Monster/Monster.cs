@@ -8,28 +8,6 @@ public class Monster : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public float hp;
-    public float maxHp;
-    public bool isHit = false;
-    public bool isIdle;
-    public bool isDie;
-    public bool isSpawn = false;
-    public bool isAttack;
-    public bool isChase;
-    public bool isEnter = false;
-    public bool isOrigin;
-    public int att;
-    public int skillAtt;
-    public Slider hpBar;
-    public NavMeshAgent navAgent;
-    public GameObject player;
-    public Action<Transform> dangerNotificationEvent;
-    public Animator animator;
-    public int monsterType;
-    public Vector3 originPos;
-    public Vector3 prevPos;
-    public GameObject coin;
-    public int coinCount;
     public enum Attribute
     {
         Fire,
@@ -37,6 +15,28 @@ public class Monster : MonoBehaviour
         Water,
         Light
     }
+    public float hp;
+    protected float maxHp;
+    public int att;
+    public int skillAtt;
+    public GameObject coin;
+    public int coinCount;
+    public Slider hpBar;
+    public bool isHit = false;
+    public bool isEnter = false;
+    protected NavMeshAgent navAgent;
+    protected GameObject player;
+    protected Action<Transform> dangerNotificationEvent;
+    protected Animator animator;
+    protected int monsterType;
+    protected Vector3 originPos;
+    protected Vector3 prevPos;
+    protected bool isOrigin;
+    protected bool isIdle;
+    protected bool isDie;
+    protected bool isSpawn = false;
+    protected bool isAttack;
+    protected bool isChase;
     public void Start()
     {
         //dangerNotificationEvent += SetDestination;
@@ -47,33 +47,56 @@ public class Monster : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(HealRecovery());
     }
-    public void CheckIdle()
+    protected void CheckIdle()
     {
         isIdle = true;
     }
-    public void HitStart()
+    protected void HitStart()
     {
         isHit = true;
     }
-    public void HitRelease()
+    protected void HitRelease()
     {
         isHit = false;
     }
-    public void DieCheck()
+    protected void DieCheck()
     {
         isDie = true;
     }
-    public void CheckSpawn()
+    protected void CheckSpawn()
     {
         isSpawn = true;
     }
-    public void CheckAttack()
+    protected void CheckAttack()
     {
         isAttack = true;
     }
-    public void CheckAttackEnd()
+    protected void CheckAttackEnd()
     {
         isAttack = false;
+    }
+    protected void StartAttack()
+    {
+        GameObject.FindGameObjectWithTag("MonsterWeapon").GetComponent<BoxCollider>().enabled = true;
+        Debug.Log("start att");
+    }
+    protected void EndAttack()
+    {
+        GameObject.FindGameObjectWithTag("MonsterWeapon").GetComponent<BoxCollider>().enabled = false;
+        Debug.Log("end att");
+    }
+    public virtual void Die() {
+        if (hp <= 0)
+        {
+            coin.GetComponent<Coin>().coinValue = coinCount;
+            coin.SetActive(true);
+            isHit = true;
+            animator.Play("Die");
+            hpBar.gameObject.SetActive(false);
+            navAgent.enabled = false;
+            if (isDie)
+                Destroy(gameObject);
+        }
     }
     IEnumerator HealRecovery()
     {
@@ -97,7 +120,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    public void MonsterMove(GameObject charactor, float chaseRange, float backRange, float attackRange)
+    protected void MonsterMove(GameObject charactor, float chaseRange, float backRange, float attackRange)
     {
         //Debug.Log(Vector3.Distance(gameObject.transform.position, originPos));
         if (isSpawn)
@@ -168,29 +191,6 @@ public class Monster : MonoBehaviour
 
         prevPos = transform.position;
     }
-    public void StartAttack()
-    {
-        GameObject.FindGameObjectWithTag("MonsterWeapon").GetComponent<BoxCollider>().enabled = true;
-        Debug.Log("start att");
-    }
-    public void EndAttack()
-    {
-        GameObject.FindGameObjectWithTag("MonsterWeapon").GetComponent<BoxCollider>().enabled = false;
-        Debug.Log("end att");
-    }
-    public void Die() {
-        if (hp <= 0)
-        {
-            coin.GetComponent<Coin>().coinValue = coinCount;
-            coin.SetActive(true);
-            isHit = true;
-            animator.Play("Die");
-            hpBar.gameObject.SetActive(false);
-            navAgent.enabled = false;
-            if (isDie)
-                Destroy(gameObject);
-        }
-    }
     //if(hp <= 0)
     //{
     //    isHit = true;
@@ -200,12 +200,12 @@ public class Monster : MonoBehaviour
     //    Die();
     //}
 
-    public void SetDestination(Transform target)
-    {
-        GetComponent<NavMeshAgent>().SetDestination(target.position);
-    }
+    //public void SetDestination(Transform target)
+    //{
+    //    GetComponent<NavMeshAgent>().SetDestination(target.position);
+    //}
 
-private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Sword")
         {
@@ -228,12 +228,5 @@ private void OnTriggerEnter(Collider other)
         {
             hpBar.value = hp / maxHp;
         }
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

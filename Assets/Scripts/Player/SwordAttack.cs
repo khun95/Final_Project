@@ -40,9 +40,6 @@ public class SwordAttack : MonoBehaviour
         mainHpBar.gameObject.SetActive(false);
         StartCoroutine(CoolTime(3f,3f));
     }
-    private void OnEnable()
-    {
-    }
     void EffectOff()
     {
         effectPooling[poolingIndex].SetActive(false);
@@ -108,7 +105,6 @@ public class SwordAttack : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
         }
-        Debug.Log("cooltime End");
     }
 
     // Update is called once per frame

@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-         
-    }
     public void BaseCampLoad()
     {
         SceneManager.LoadScene(1);
@@ -26,8 +22,5 @@ public class SceneController : MonoBehaviour
         Application.Quit();
     }
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

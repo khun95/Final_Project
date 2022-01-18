@@ -1356,28 +1356,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  maxHp: 0
-  isHit: 0
-  isIdle: 0
-  isDie: 0
-  isSpawn: 0
-  isAttack: 0
-  isChase: 0
-  isEnter: 0
-  isOrigin: 0
   att: 10
   skillAtt: 30
-  hpBar: {fileID: 991024436651795093}
-  navAgent: {fileID: 3542605458449985810}
-  player: {fileID: 0}
-  animator: {fileID: 0}
-  monsterType: 0
-  originPos: {x: 0, y: 0, z: 0}
-  prevPos: {x: 0, y: 0, z: 0}
   coin: {fileID: 8892328372851674096}
   coinCount: 100
+  hpBar: {fileID: 991024436651795093}
+  isHit: 0
+  isEnter: 0
   charactor: {fileID: 0}
-  Attribute: 0
+  Attribute: 2
 --- !u!136 &3542605458449985808
 CapsuleCollider:
   m_ObjectHideFlags: 0

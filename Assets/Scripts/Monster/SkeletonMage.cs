@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 public class SkeletonMage : Monster
 {
-    public GameObject charactor;
-    public GameObject ball;
-    public GameObject ballPos;
+    [SerializeField] GameObject ball;
+    [SerializeField] GameObject ballPos;
     ////public bool isSpawn = false;
     //public bool isEnter = false;
     //Vector3 originPos;

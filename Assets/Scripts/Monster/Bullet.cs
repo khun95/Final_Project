@@ -5,8 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     Transform playerPos; 
-    Vector2 dir;
     Rigidbody rigid;
+    Vector2 dir;
     public int att;
     // Start is called before the first frame update
     void Start()
@@ -25,8 +25,4 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

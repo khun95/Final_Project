@@ -11,10 +11,6 @@ public class ShopPanelController : MonoBehaviour
     public GameObject player;
     public GameObject Panel;
     public TextMeshProUGUI moneyText;
-    void Start()
-    {
-        
-    }
     public void CloseShop()
     {
         gameObject.SetActive(false);
